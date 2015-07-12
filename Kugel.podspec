@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
 
   s.homepage     = "https://github.com/TakeScoop/Kugel"
   s.license      = "MIT"
-  s.author       = { "Loïs Di Qual" => "lois@takescoop.com" }
+  s.author       = { "Scoop" => "ops@takescoop.com" }
 
   s.source       = { :git => "git@github.com:TakeScoop/Kugel.git" }
   s.source_files = "Kugel/Kugel.swift"
