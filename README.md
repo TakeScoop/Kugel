@@ -5,7 +5,7 @@
 Publish
 -------
 
-```
+```swift
 Kugel.publish("NotificationName")
 Kugel.publish("NotificationName", object: anObject)
 Kugel.publish("NotificationName", object: anObject, userInfo: ["foo": "bar"])
@@ -14,7 +14,7 @@ Kugel.publish("NotificationName", object: anObject, userInfo: ["foo": "bar"])
 Subscribe
 ---------
 
-```
+```swift
 // Block based
 Kugel.subscribe("NotificationName") { notification in
     // Something cool
@@ -33,7 +33,7 @@ Kugel.subscribe(self, [
 Unsubscribe
 -----------
 
-```
+```swift
 // Block based
 let token = Kugel.subscribe("NotificationName") { _ in }
 Kugel.unsubscribeToken(token)
@@ -58,7 +58,7 @@ NSObject Extension
 
 From an instance of an `NSObject` (pretty much all classes from AppKit, UIKit, NSFoundation, etc), you can subscribe/unsubscribe without having to pass an observer.
 
-```
+```swift
 // Subscribe - Single
 subscribe(name: "NotificationName", selector: "onNotificationReceived:")
 
@@ -84,6 +84,6 @@ unsubscribeAll()
 License
 -------
 
-This project is copyrighted under the MIT license. Complete license can be found here: <https://github.com/TakeScoop/Kugel/blob/master/LICENSE.md>
+This project is copyrighted under the MIT license. Complete license can be found here: <https://github.com/TakeScoop/Kugel/blob/master/LICENSE>
 
 Bone icon made by [Freepik](http://www.flaticon.com/authors/freepik) from <http://www.flaticon.com> 
