@@ -73,7 +73,7 @@ public class Kugel {
 
 public extension NSObject {
     
-    public func subscribe(#name: String, selector: Selector) {
+    public func subscribe(name name: String, selector: Selector) {
         return Kugel.subscribe(self, name: name, selector: selector)
     }
     
@@ -81,7 +81,7 @@ public extension NSObject {
         return Kugel.subscribe(self, notifications)
     }
     
-    public func unsubscribe(#name: String) {
+    public func unsubscribe(name name: String) {
         Kugel.notificationCenter.removeObserver(self, name: name, object: nil)
     }
     
