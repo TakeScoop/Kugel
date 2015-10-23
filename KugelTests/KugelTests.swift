@@ -149,65 +149,6 @@ class KugelTests: XCTestCase {
         waitForExpectationsWithTimeout(TestTimeout) { _ in }
     }
     
-    // MARK: - NSObject extension
-    
-    func testNSObjectSubscribeNameSelector() {
-        expectation = expectationWithDescription("NotificationExceptation")
-        subscribe(name: NotificationName, selector: "onNameReceived:")
-        Kugel.publish(NotificationName)
-        waitForExpectationsWithTimeout(TestTimeout) { _ in }
-    }
-    
-    func testNSObjectSubscribeNotifications() {
-        expectation1 = expectationWithDescription("NotificationExceptation1")
-        expectation2 = expectationWithDescription("NotificationExceptation2")
-        subscribe([
-            NotificationName1: "onName1Received:",
-            NotificationName2: "onName2Received:"
-        ])
-        Kugel.publish(NotificationName1)
-        Kugel.publish(NotificationName2)
-        waitForExpectationsWithTimeout(TestTimeout) { _ in }
-    }
-    
-    func testNSObjectUnsubscribeName() {
-        expectation = expectationWithDescription("NotificationExceptation")
-        subscribe(name: NotificationName, selector: "onUnexpectedNotificationReceived:")
-        unsubscribe(name: NotificationName)
-        Kugel.publish(NotificationName)
-        expectation.fulfill()
-        waitForExpectationsWithTimeout(TestTimeout) { _ in }
-    }
-    
-    func testNSObjectUnsubscribeNames() {
-        expectation = expectationWithDescription("NotificationExceptation")
-        subscribe([
-            NotificationName1: "onUnexpectedNotificationReceived:",
-            NotificationName2: "onUnexpectedNotificationReceived:"
-        ])
-        unsubscribe([
-            NotificationName1,
-            NotificationName2
-        ])
-        Kugel.publish(NotificationName1)
-        Kugel.publish(NotificationName2)
-        expectation.fulfill()
-        waitForExpectationsWithTimeout(TestTimeout) { _ in }
-    }
-    
-    func testNSObjectUnsubscribeAll() {
-        expectation = expectationWithDescription("NotificationExceptation")
-        subscribe([
-            NotificationName1: "onUnexpectedNotificationReceived:",
-            NotificationName2: "onUnexpectedNotificationReceived:"
-        ])
-        unsubscribeAll()
-        Kugel.publish(NotificationName1)
-        Kugel.publish(NotificationName2)
-        expectation.fulfill()
-        waitForExpectationsWithTimeout(TestTimeout) { _ in }
-    }
-    
     // MARK: - Listeners
     
     @objc

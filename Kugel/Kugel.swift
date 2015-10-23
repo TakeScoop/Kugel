@@ -71,29 +71,3 @@ public class Kugel {
     }
 }
 
-public extension NSObject {
-    
-    public func subscribe(name name: String, selector: Selector) {
-        return Kugel.subscribe(self, name: name, selector: selector)
-    }
-    
-    public func subscribe(notifications: [String: Selector]) {
-        return Kugel.subscribe(self, notifications)
-    }
-    
-    public func unsubscribe(name name: String) {
-        Kugel.notificationCenter.removeObserver(self, name: name, object: nil)
-    }
-    
-    public func unsubscribe(names: [String]) {
-        for name in names {
-            unsubscribe(name: name)
-        }
-    }
-    
-    public func unsubscribeAll() {
-        Kugel.notificationCenter.removeObserver(self)
-    }
-    
-}
-
