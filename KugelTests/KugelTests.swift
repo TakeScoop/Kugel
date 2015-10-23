@@ -33,7 +33,7 @@ class KugelTests: XCTestCase {
     override func tearDown() {
         Kugel.unsubscribeAll(self)
         if let token = token {
-            Kugel.unsubscribe(token)
+            Kugel.unsubscribeToken(token)
         }
     }
     
