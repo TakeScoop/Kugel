@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "Kugel"
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
   s.summary      = "A glorious Swift wrapper around NSNotificationCenter"
 
   s.description  = <<-DESC
