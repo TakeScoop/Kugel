@@ -2,8 +2,17 @@
 
 **Kugel** - A glorious Swift wrapper around [NSNotificationCenter](https://developer.apple.com/library/mac/documentation/Cocoa/Reference/Foundation/Classes/NSNotificationCenter_Class/).
 
-Publish
+Install
 -------
+
+```
+pod 'Kugel', :git => 'git@github.com:TakeScoop/SwiftyRSA.git'
+```
+
+Usage
+-----
+
+### Publish
 
 ```swift
 Kugel.publish("NotificationName")
@@ -11,8 +20,7 @@ Kugel.publish("NotificationName", object: anObject)
 Kugel.publish("NotificationName", object: anObject, userInfo: ["foo": "bar"])
 ```
 
-Subscribe
----------
+### Subscribe
 
 ```swift
 // Block based
@@ -30,8 +38,7 @@ Kugel.subscribe(self, [
 ]
 ```
 
-Unsubscribe
------------
+### Unsubscribe
 
 ```swift
 // Block based
@@ -51,35 +58,7 @@ Kugel.unsubscribe(self, [
 Kugel.unsubscribeAll(self)
 ```
 
-Warning: `Kugel.unsubscribeAll` won't unsubscribe block-based notifications. Use `unsubscribe(token: KugelToken)` for that.
-
-NSObject Extension
-------------------
-
-From an instance of an `NSObject` (pretty much all classes from AppKit, UIKit, NSFoundation, etc), you can subscribe/unsubscribe without having to pass an observer.
-
-```swift
-// Subscribe - Single
-subscribe(name: "NotificationName", selector: "onNotificationReceived:")
-
-// Subscribe - Multiple
-subscribe([
-	"NotificationName1",
-	"NotificationName2"
-])
-
-// Unsubscribe - Single
-unsubscribe(name: "NotificationName")
-
-// Unsubscribe - Multiple
-unsubscribe([
-	"NotificationName1",
-	"NotificationName2"
-])
-
-// Unsubscribe all
-unsubscribeAll()
-```
+Warning: `Kugel.unsubscribeAll` won't unsubscribe block-based notifications. Use `Kugel.unsubscribe(token: KugelToken)` for that.
 
 License
 -------
