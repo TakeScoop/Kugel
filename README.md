@@ -6,7 +6,7 @@ Install
 -------
 
 ```
-pod 'Kugel', :git => 'git@github.com:TakeScoop/SwiftyRSA.git'
+pod 'Kugel'
 ```
 
 Usage

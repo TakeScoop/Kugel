@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "Kugel"
-  s.version      = "0.0.3"
+  s.version      = "0.1.0"
   s.summary      = "A glorious Swift wrapper around NSNotificationCenter"
 
   s.description  = <<-DESC
@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   s.license      = "MIT"
   s.author       = { "Scoop" => "ops@takescoop.com" }
 
-  s.source       = { :git => "git@github.com:TakeScoop/Kugel.git" }
+  s.source       = { :git => "ghttps://github.com/TakeScoop/Kugel.git", :tag => "0.1.0" }
   s.source_files = "Kugel/Kugel.swift"
 
   s.requires_arc = true
