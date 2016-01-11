@@ -20,11 +20,11 @@ public class Kugel {
         notificationCenter.postNotification(notification)
     }
     
-    public class func publish(name: String, object: AnyObject, userInfo: [NSObject: AnyObject]) {
+    public class func publish(name: String, object: AnyObject?, userInfo: [NSObject: AnyObject]) {
         notificationCenter.postNotificationName(name, object: object, userInfo: userInfo)
     }
     
-    public class func publish(name: String, object: AnyObject) {
+    public class func publish(name: String, object: AnyObject?) {
         notificationCenter.postNotificationName(name, object: object)
     }
     
@@ -40,7 +40,7 @@ public class Kugel {
         }
     }
     
-    public class func subscribe(observer: AnyObject, name: String, selector: Selector) {
+    public class func subscribe(observer: AnyObject, name: String?, selector: Selector) {
         return notificationCenter.addObserver(observer, selector: selector, name: name, object: nil)
     }
     
@@ -56,7 +56,7 @@ public class Kugel {
         notificationCenter.removeObserver(token)
     }
     
-    public class func unsubscribe(observer: AnyObject, name: String) {
+    public class func unsubscribe(observer: AnyObject, name: String?) {
         return notificationCenter.removeObserver(observer, name: name, object: nil)
     }
     
