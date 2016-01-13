@@ -8,8 +8,6 @@
 
 import Foundation
 
-public typealias KugelToken = NSObjectProtocol
-
 public class Kugel {
     
     private static let notificationCenter = NSNotificationCenter.defaultCenter()
@@ -20,54 +18,38 @@ public class Kugel {
         notificationCenter.postNotification(notification)
     }
     
-    public class func publish(name: String, object: AnyObject, userInfo: [NSObject: AnyObject]) {
+    public class func publish(name: String, object: AnyObject? = nil, userInfo: [NSObject: AnyObject]? = nil) {
         notificationCenter.postNotificationName(name, object: object, userInfo: userInfo)
-    }
-    
-    public class func publish(name: String, object: AnyObject) {
-        notificationCenter.postNotificationName(name, object: object)
-    }
-    
-    public class func publish(name: String) {
-        notificationCenter.postNotificationName(name, object: nil)
     }
     
     // Subscribe
     
-    public class func subscribe(name: String, block: (NSNotification -> Void)) -> KugelToken {
+    public class func subscribe(name: String, block: (NSNotification -> Void)) -> NSObjectProtocol {
         return notificationCenter.addObserverForName(name, object: nil, queue: nil) { notification in
             block(notification)
         }
     }
     
-    public class func subscribe(observer: AnyObject, name: String, selector: Selector) {
-        return notificationCenter.addObserver(observer, selector: selector, name: name, object: nil)
+    public class func subscribe(observer: AnyObject, name: String, selector: Selector, object: AnyObject? = nil) {
+        return notificationCenter.addObserver(observer, selector: selector, name: name, object: object)
     }
     
-    public class func subscribe(observer: AnyObject, _ notifications: [String: Selector]) {
+    public class func subscribe(observer: AnyObject, _ notifications: [String: Selector], object: AnyObject? = nil) {
         for (name, selector) in notifications {
-            subscribe(observer, name: name, selector: selector)
+            subscribe(observer, name: name, selector: selector, object: object)
         }
     }
     
     // Unsubscribe
     
-    public class func unsubscribeToken(token: KugelToken) {
-        notificationCenter.removeObserver(token)
-    }
-    
-    public class func unsubscribe(observer: AnyObject, name: String) {
+    public class func unsubscribe(observer: AnyObject, name: String? = nil, object: AnyObject? = nil) {
         return notificationCenter.removeObserver(observer, name: name, object: nil)
     }
     
-    public class func unsubscribe(observer: AnyObject, _ names: [String]) {
+    public class func unsubscribe(observer: AnyObject, _ names: [String], object: AnyObject? = nil) {
         for name in names {
-            unsubscribe(observer, name: name)
+            unsubscribe(observer, name: name, object: object)
         }
-    }
-    
-    public class func unsubscribeAll(observer: AnyObject) {
-        notificationCenter.removeObserver(observer)
     }
 }
 

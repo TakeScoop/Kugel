@@ -17,48 +17,52 @@ Usage
 ```swift
 Kugel.publish("NotificationName")
 Kugel.publish("NotificationName", object: anObject)
+Kugel.publish("NotificationName", userInfo: ["foo": "bar"])
 Kugel.publish("NotificationName", object: anObject, userInfo: ["foo": "bar"])
+Kugel.publish(NSNotification(name: "NotificationName"))
 ```
 
 ### Subscribe
 
 ```swift
-// Block based
-Kugel.subscribe("NotificationName") { notification in
-    // Something cool
-}
+let token = Kugel.subscribe("NotificationName") { notification in }
 
-// Selector based - Single 
 Kugel.subscribe(self, name: "NotificationName", selector: "onNotificationReceived:")
 
-// Selector based - Multiple
+Kugel.subscribe(self, name: "NotificationName", selector: "onNotificationReceived:", object: object)
+
 Kugel.subscribe(self, [
     "NotificationName1": "onNotification1Received:",
     "NotificationName2": "onNotification2Received:",
-]
+])
+
+Kugel.subscribe(self, [
+    "NotificationName1": "onNotification1Received:",
+    "NotificationName2": "onNotification2Received:",
+], object: object)
 ```
 
 ### Unsubscribe
 
 ```swift
-// Block based
-let token = Kugel.subscribe("NotificationName") { _ in }
-Kugel.unsubscribeToken(token)
+Kugel.unsubscribe(token)
 
-// Selector based - Single
 Kugel.unsubscribe(self, name: "NotificationName")
 
-// Selector based - Multiple
+Kugel.unsubscribe(self, name: "NotificationName", object: object)
+
 Kugel.unsubscribe(self, [
 	"NotificationName1",
 	"NotificationName2"
 ])
 
-// All
-Kugel.unsubscribeAll(self)
-```
+Kugel.unsubscribe(self, [
+	"NotificationName1",
+	"NotificationName2"
+], object: object)
 
-Warning: `Kugel.unsubscribeAll` won't unsubscribe block-based notifications. Use `Kugel.unsubscribe(token: KugelToken)` for that.
+Kugel.unsubscribe(self)
+```
 
 License
 -------
