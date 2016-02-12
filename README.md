@@ -4,7 +4,7 @@ Kugel
 ![Tests](https://img.shields.io/circleci/project/TakeScoop/Kugel/master.svg)
 ![Platforms](https://img.shields.io/badge/platforms-ios%20%7C%20osx%20%20%7C%20tvos-lightgrey.svg)
 ![Languages](https://img.shields.io/badge/languages-swift%20%7C%20objc-orange.svg)
-![Cocoapods](https://img.shields.io/cocoapods/v/Kugel.svg)
+![CocoaPods](https://img.shields.io/cocoapods/v/Kugel.svg)
 
 A glorious Swift wrapper around [NSNotificationCenter](https://developer.apple.com/library/mac/documentation/Cocoa/Reference/Foundation/Classes/NSNotificationCenter_Class/).
 
