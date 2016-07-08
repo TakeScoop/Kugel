@@ -16,18 +16,18 @@ class KugelTests: XCTestCase {
     private var expectation2: XCTestExpectation!
     private var token: AnyObject!
     
-    private let TestTimeout: NSTimeInterval = 1
+    private let TestTimeout: TimeInterval = 1
     
-    private let NotificationName     = "TestNotifification"
+    private let NotificationName     = Notification.Name(rawValue: "TestNotification")
     private let NotificationObject   = NSObject()
     private let NotificationUserInfo = [NSObject: AnyObject]()
-    private var testNotification: NSNotification!
+    private var testNotification: Notification!
     
-    private let NotificationName1 = "NotificationName1"
-    private let NotificationName2 = "NotificationName2"
+    private let NotificationName1 = Notification.Name(rawValue: "NotificationName1")
+    private let NotificationName2 = Notification.Name(rawValue: "NotificationName2")
     
     override func setUp() {
-        testNotification = NSNotification(name: NotificationName, object: NotificationObject)
+        testNotification = Notification(name: NotificationName, object: NotificationObject)
     }
     
     override func tearDown() {
@@ -40,117 +40,117 @@ class KugelTests: XCTestCase {
     // MARK: - Publish
 
     func testPublishNotification() {
-        expectation = expectationWithDescription("NotificationExceptation")
-        Kugel.subscribe(self, name: NotificationName, selector: "onTestNotificationReceived:")
+        expectation = self.expectation(withDescription: "NotificationExceptation")
+        Kugel.subscribe(self, name: NotificationName, selector: #selector(onTestNotificationReceived))
         Kugel.publish(testNotification)
-        waitForExpectationsWithTimeout(TestTimeout) { _ in }
+        waitForExpectations(withTimeout: TestTimeout) { _ in }
     }
     
     func testPublishName() {
-        expectation = expectationWithDescription("NotificationExceptation")
-        Kugel.subscribe(self, name: NotificationName, selector: "onNameReceived:")
+        expectation = self.expectation(withDescription: "NotificationExceptation")
+        Kugel.subscribe(self, name: NotificationName, selector: #selector(onNameReceived))
         Kugel.publish(NotificationName)
-        waitForExpectationsWithTimeout(TestTimeout) { _ in }
+        waitForExpectations(withTimeout: TestTimeout) { _ in }
     }
     
     func testPublishNameObject() {
-        expectation = expectationWithDescription("NotificationExceptation")
-        Kugel.subscribe(self, name: NotificationName, selector: "onNameObjectReceived:")
+        expectation = self.expectation(withDescription: "NotificationExceptation")
+        Kugel.subscribe(self, name: NotificationName, selector: #selector(onNameObjectReceived))
         Kugel.publish(NotificationName, object: NotificationObject)
-        waitForExpectationsWithTimeout(TestTimeout) { _ in }
+        waitForExpectations(withTimeout: TestTimeout) { _ in }
     }
     
     func testPublishNameUserInfoObject() {
-        expectation = expectationWithDescription("NotificationExceptation")
-        Kugel.subscribe(self, name: NotificationName, selector: "onNameObjectUserInfoReceived:")
+        expectation = self.expectation(withDescription: "NotificationExceptation")
+        Kugel.subscribe(self, name: NotificationName, selector: #selector(onNameObjectUserInfoReceived))
         Kugel.publish(NotificationName, object: NotificationObject, userInfo: NotificationUserInfo)
-        waitForExpectationsWithTimeout(TestTimeout) { _ in }
+        waitForExpectations(withTimeout: TestTimeout) { _ in }
     }
     
     func testPublishNameUserInfo() {
-        expectation = expectationWithDescription("NotificationExceptation")
-        Kugel.subscribe(self, name: NotificationName, selector: "onNameUserInfoReceived:")
+        expectation = self.expectation(withDescription: "NotificationExceptation")
+        Kugel.subscribe(self, name: NotificationName, selector: #selector(onNameUserInfoReceived))
         Kugel.publish(NotificationName, userInfo: NotificationUserInfo)
-        waitForExpectationsWithTimeout(TestTimeout) { _ in }
+        waitForExpectations(withTimeout: TestTimeout) { _ in }
     }
     
     // MARK: - Subscribe
     
     func testSubscribeNameBlock() {
-        expectation = expectationWithDescription("NotificationExceptation")
+        expectation = self.expectation(withDescription: "NotificationExceptation")
         token = Kugel.subscribe(NotificationName) { notification in
             XCTAssert(notification.name == self.NotificationName)
             self.expectation.fulfill()
         }
         Kugel.publish(NotificationName)
-        waitForExpectationsWithTimeout(TestTimeout) { _ in }
+        waitForExpectations(withTimeout: TestTimeout) { _ in }
     }
     
     func testSubscribeNameSelector() {
-        expectation = expectationWithDescription("NotificationExceptation")
-        Kugel.subscribe(self, name: NotificationName, selector: "onNameReceived:")
+        expectation = self.expectation(withDescription: "NotificationExceptation")
+        Kugel.subscribe(self, name: NotificationName, selector: #selector(onNameReceived))
         Kugel.publish(NotificationName)
-        waitForExpectationsWithTimeout(TestTimeout) { _ in }
+        waitForExpectations(withTimeout: TestTimeout) { _ in }
     }
     
     func testSubscribeNameObjectSelector() {
-        expectation = expectationWithDescription("NotificationExceptation")
-        Kugel.subscribe(self, name: NotificationName, selector: "onNameObjectReceived:")
+        expectation = self.expectation(withDescription: "NotificationExceptation")
+        Kugel.subscribe(self, name: NotificationName, selector: #selector(onNameObjectReceived))
         Kugel.publish(NotificationName, object: NotificationObject)
-        waitForExpectationsWithTimeout(TestTimeout) { _ in }
+        waitForExpectations(withTimeout: TestTimeout) { _ in }
     }
     
     func testSubscribeNotifications() {
-        expectation1 = expectationWithDescription("NotificationExceptation1")
-        expectation2 = expectationWithDescription("NotificationExceptation2")
+        expectation1 = self.expectation(withDescription: "NotificationExceptation1")
+        expectation2 = self.expectation(withDescription: "NotificationExceptation2")
         Kugel.subscribe(self, [
-            NotificationName1: "onName1Received:",
-            NotificationName2: "onName2Received:"
+            NotificationName1: #selector(onName1Received),
+            NotificationName2: #selector(onName2Received)
         ])
         Kugel.publish(NotificationName1)
         Kugel.publish(NotificationName2)
-        waitForExpectationsWithTimeout(TestTimeout) { _ in }
+        waitForExpectations(withTimeout: TestTimeout) { _ in }
     }
     
     func testSubscribeObjectNotifications() {
-        expectation1 = expectationWithDescription("NotificationExceptation1")
-        expectation2 = expectationWithDescription("NotificationExceptation2")
+        expectation1 = self.expectation(withDescription: "NotificationExceptation1")
+        expectation2 = self.expectation(withDescription: "NotificationExceptation2")
         Kugel.subscribe(self, [
-            NotificationName1: "onNameObject1Received:",
-            NotificationName2: "onNameObject2Received:"
+            NotificationName1: #selector(onNameObject1Received),
+            NotificationName2: #selector(onNameObject2Received)
         ], object: NotificationObject)
         Kugel.publish(NotificationName1, object: NotificationObject)
         Kugel.publish(NotificationName2, object: NotificationObject)
-        waitForExpectationsWithTimeout(TestTimeout) { _ in }
+        waitForExpectations(withTimeout: TestTimeout) { _ in }
     }
     
     // MARK: - Unsubscribe
     
     func testUnsubscribeToken() {
-        expectation = expectationWithDescription("NotificationExceptation")
+        expectation = self.expectation(withDescription: "NotificationExceptation")
         token = Kugel.subscribe(NotificationName) { notification in
             XCTAssert(false)
         }
         Kugel.unsubscribe(token)
         Kugel.publish(NotificationName)
         expectation.fulfill()
-        waitForExpectationsWithTimeout(TestTimeout) { _ in }
+        waitForExpectations(withTimeout: TestTimeout) { _ in }
     }
     
     func testUnsubscribeName() {
-        expectation = expectationWithDescription("NotificationExceptation")
-        Kugel.subscribe(self, name: NotificationName, selector: "onUnexpectedNotificationReceived:")
+        expectation = self.expectation(withDescription: "NotificationExceptation")
+        Kugel.subscribe(self, name: NotificationName, selector: #selector(onUnexpectedNotificationReceived))
         Kugel.unsubscribe(self, name: NotificationName)
         Kugel.publish(NotificationName)
         expectation.fulfill()
-        waitForExpectationsWithTimeout(TestTimeout) { _ in }
+        waitForExpectations(withTimeout: TestTimeout) { _ in }
     }
     
     func testUnsubscribeNames() {
-        expectation = expectationWithDescription("NotificationExceptation")
+        expectation = self.expectation(withDescription: "NotificationExceptation")
         Kugel.subscribe(self, [
-            NotificationName1: "onUnexpectedNotificationReceived:",
-            NotificationName2: "onUnexpectedNotificationReceived:"
+            NotificationName1: #selector(onUnexpectedNotificationReceived),
+            NotificationName2: #selector(onUnexpectedNotificationReceived)
         ])
         Kugel.unsubscribe(self, [
             NotificationName1,
@@ -159,106 +159,106 @@ class KugelTests: XCTestCase {
         Kugel.publish(NotificationName1)
         Kugel.publish(NotificationName2)
         expectation.fulfill()
-        waitForExpectationsWithTimeout(TestTimeout) { _ in }
+        waitForExpectations(withTimeout: TestTimeout) { _ in }
     }
     
     func testUnsubscribeAll() {
-        expectation = expectationWithDescription("NotificationExceptation")
+        expectation = self.expectation(withDescription: "NotificationExceptation")
         Kugel.subscribe(self, [
-            NotificationName1: "onUnexpectedNotificationReceived:",
-            NotificationName2: "onUnexpectedNotificationReceived:"
+            NotificationName1: #selector(onUnexpectedNotificationReceived),
+            NotificationName2: #selector(onUnexpectedNotificationReceived)
         ])
         Kugel.unsubscribe(self)
         Kugel.publish(NotificationName1)
         Kugel.publish(NotificationName2)
         expectation.fulfill()
-        waitForExpectationsWithTimeout(TestTimeout) { _ in }
+        waitForExpectations(withTimeout: TestTimeout) { _ in }
     }
     
     func testUnsubscribeObjectAll() {
-        expectation = expectationWithDescription("NotificationExceptation")
+        expectation = self.expectation(withDescription: "NotificationExceptation")
         Kugel.subscribe(self, [
-            NotificationName1: "onUnexpectedNotificationReceived:",
-            NotificationName2: "onUnexpectedNotificationReceived:"
+            NotificationName1: #selector(onUnexpectedNotificationReceived),
+            NotificationName2: #selector(onUnexpectedNotificationReceived)
         ], object: NotificationObject)
         Kugel.unsubscribe(self)
         Kugel.publish(NotificationName1, object: NotificationObject)
         Kugel.publish(NotificationName2, object: NotificationObject)
         expectation.fulfill()
-        waitForExpectationsWithTimeout(TestTimeout) { _ in }
+        waitForExpectations(withTimeout: TestTimeout) { _ in }
     }
     
     // MARK: - Listeners
     
     @objc
-    private func onTestNotificationReceived(notification: NSNotification) {
+    private func onTestNotificationReceived(_ notification: Notification) {
         XCTAssert(notification == testNotification)
         expectation.fulfill()
     }
     
     @objc
-    private func onNameReceived(notification: NSNotification) {
+    private func onNameReceived(_ notification: Notification) {
         XCTAssertEqual(notification.name, NotificationName)
         expectation.fulfill()
     }
             
     @objc
-    private func onName1Received(notification: NSNotification) {
+    private func onName1Received(_ notification: Notification) {
     	XCTAssertEqual(notification.name, NotificationName1)
     	expectation1.fulfill()
     }
             
     @objc
-    private func onName2Received(notification: NSNotification) {
+    private func onName2Received(_ notification: Notification) {
     	XCTAssertEqual(notification.name, NotificationName2)
     	expectation2.fulfill()
     }
     
     @objc
-    private func onNameObjectReceived(notification: NSNotification) {
+    private func onNameObjectReceived(_ notification: Notification) {
         XCTAssertEqual(notification.name, NotificationName)
         XCTAssertEqual(notification.object as? NSObject, NotificationObject)
-        XCTAssertNil(notification.userInfo)
+        XCTAssertNil((notification as NSNotification).userInfo)
         expectation.fulfill()
     }
     
     @objc
-    private func onNameObject1Received(notification: NSNotification) {
+    private func onNameObject1Received(_ notification: Notification) {
         XCTAssertEqual(notification.name, NotificationName1)
         XCTAssertEqual(notification.object as? NSObject, NotificationObject)
         expectation1.fulfill()
     }
     
     @objc
-    private func onNameObject2Received(notification: NSNotification) {
+    private func onNameObject2Received(_ notification: Notification) {
         XCTAssertEqual(notification.name, NotificationName2)
         XCTAssertEqual(notification.object as? NSObject, NotificationObject)
         expectation2.fulfill()
     }
     
     @objc
-    private func onNameObjectUserInfoReceived(notification: NSNotification) {
+    private func onNameObjectUserInfoReceived(_ notification: Notification) {
         XCTAssertEqual(notification.name, NotificationName)
         XCTAssertEqual(notification.object as? NSObject, NotificationObject)
         
-        let isUserInfoEqual = NSDictionary(dictionary: notification.userInfo!).isEqualToDictionary(NotificationUserInfo)
+        let isUserInfoEqual = NSDictionary(dictionary: (notification as NSNotification).userInfo!).isEqual(to: NotificationUserInfo)
         XCTAssertTrue(isUserInfoEqual)
         
         expectation.fulfill()
     }
     
     @objc
-    private func onNameUserInfoReceived(notification: NSNotification) {
+    private func onNameUserInfoReceived(_ notification: Notification) {
         XCTAssertEqual(notification.name, NotificationName)
         XCTAssertNil(notification.object)
         
-        let isUserInfoEqual = NSDictionary(dictionary: notification.userInfo!).isEqualToDictionary(NotificationUserInfo)
+        let isUserInfoEqual = NSDictionary(dictionary: (notification as NSNotification).userInfo!).isEqual(to: NotificationUserInfo)
         XCTAssertTrue(isUserInfoEqual)
         
         expectation.fulfill()
     }
     
-    @objc func onUnexpectedNotificationReceived(notification: NSNotification) {
+    @objc func onUnexpectedNotificationReceived(_ notification: Notification) {
         XCTAssert(false)
     }
 }
