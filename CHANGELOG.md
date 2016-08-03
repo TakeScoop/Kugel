@@ -1,7 +1,13 @@
 Kugel Changelog
 ===============
 
-## [Unreleased (master)][master]
+## [master]
+
+### Breaking
+
+### Other changes
+
+## [0.2.0]
 
 ### Breaking
 
@@ -19,5 +25,6 @@ Kugel Changelog
 
 Initial public release.
 
-[master]: https://github.com/TakeScoop/scoop-ios/compare/0.1.0...master
+[master]: https://github.com/TakeScoop/scoop-ios/compare/0.2.0...master
+[0.2.0]: https://github.com/TakeScoop/Kugel/releases/tag/0.2.0
 [0.1.0]: https://github.com/TakeScoop/Kugel/releases/tag/0.1.0
