@@ -18,7 +18,7 @@ public class Kugel {
         notificationCenter.post(notification)
     }
     
-    public class func publish(_ name: NSNotification.Name, object: AnyObject? = nil, userInfo: [NSObject: AnyObject]? = nil) {
+    public class func publish(_ name: NSNotification.Name, object: Any? = nil, userInfo: [AnyHashable: Any]? = nil) {
         notificationCenter.post(name: name, object: object, userInfo: userInfo)
     }
     
@@ -30,11 +30,11 @@ public class Kugel {
         }
     }
     
-    public class func subscribe(_ observer: AnyObject, name: NSNotification.Name, selector: Selector, object: AnyObject? = nil) {
+    public class func subscribe(_ observer: Any, name: NSNotification.Name, selector: Selector, object: Any? = nil) {
         return notificationCenter.addObserver(observer, selector: selector, name: name, object: object)
     }
     
-    public class func subscribe(_ observer: AnyObject, _ notifications: [NSNotification.Name: Selector], object: AnyObject? = nil) {
+    public class func subscribe(_ observer: Any, _ notifications: [NSNotification.Name: Selector], object: Any? = nil) {
         for (name, selector) in notifications {
             subscribe(observer, name: name, selector: selector, object: object)
         }
@@ -42,11 +42,11 @@ public class Kugel {
     
     // Unsubscribe
     
-    public class func unsubscribe(_ observer: AnyObject, name: NSNotification.Name? = nil, object: AnyObject? = nil) {
+    public class func unsubscribe(_ observer: Any, name: NSNotification.Name? = nil, object: Any? = nil) {
         return notificationCenter.removeObserver(observer, name: name, object: nil)
     }
     
-    public class func unsubscribe(_ observer: AnyObject, _ names: [NSNotification.Name], object: AnyObject? = nil) {
+    public class func unsubscribe(_ observer: Any, _ names: [NSNotification.Name], object: Any? = nil) {
         for name in names {
             unsubscribe(observer, name: name, object: object)
         }
