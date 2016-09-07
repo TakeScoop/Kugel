@@ -24,7 +24,7 @@ public class Kugel {
     
     // Subscribe
     
-    public class func subscribe(_ name: NSNotification.Name, block: ((Notification) -> Void)) -> NSObjectProtocol {
+    public class func subscribe(_ name: NSNotification.Name, block: @escaping ((Notification) -> Void)) -> NSObjectProtocol {
         return notificationCenter.addObserver(forName: name, object: nil, queue: nil) { notification in
             block(notification)
         }
