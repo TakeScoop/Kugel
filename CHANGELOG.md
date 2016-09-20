@@ -11,6 +11,7 @@ Kugel Changelog
 
 ### Breaking
 
+ * Updated codebase to Swift 3.0
  * Removed `Kugel.unsubscribeAll()`, `Kugel.unsubscribeToken()`. Use `Kugel.unsubscribe()` instead.
  * Removed `KugelToken` (which was an alias of `NSObjectProtocol`)
 
