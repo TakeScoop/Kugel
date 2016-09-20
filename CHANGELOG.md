@@ -7,11 +7,16 @@ Kugel Changelog
 
 ### Other changes
 
-## [0.2.0]
+## [0.3.0]
 
 ### Breaking
 
  * Updated codebase to Swift 3.0
+
+## [0.2.0]
+
+### Breaking
+
  * Removed `Kugel.unsubscribeAll()`, `Kugel.unsubscribeToken()`. Use `Kugel.unsubscribe()` instead.
  * Removed `KugelToken` (which was an alias of `NSObjectProtocol`)
 
@@ -26,6 +31,7 @@ Kugel Changelog
 
 Initial public release.
 
-[master]: https://github.com/TakeScoop/scoop-ios/compare/0.2.0...master
+[master]: https://github.com/TakeScoop/scoop-ios/compare/0.3.0...master
+[0.3.0]: https://github.com/TakeScoop/Kugel/releases/tag/0.3.0
 [0.2.0]: https://github.com/TakeScoop/Kugel/releases/tag/0.2.0
 [0.1.0]: https://github.com/TakeScoop/Kugel/releases/tag/0.1.0
