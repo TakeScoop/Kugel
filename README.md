@@ -8,6 +8,30 @@ Kugel
 
 A glorious Swift wrapper around [NSNotificationCenter](https://developer.apple.com/library/mac/documentation/Cocoa/Reference/Foundation/Classes/NSNotificationCenter_Class/).
 
+Important note
+--------------
+
+**This library is not being maintained anymore.**
+
+With Swift 3, working with `NotificationCenter` is more concise so we recommend using `NotificationCenter.default` directly.
+
+The only feature that `Kugel` had over using `NotificationCenter` was to subscribe to multiple events at once using a `notification name => selector` map, but this can be easily implemented in your own code using the following extension:
+
+```
+extension NotificationCenter {
+    func addObserver(_ observer: Any, _ namesAndSelectors: [NSNotification.Name: Selector], object: Any? = nil) {
+        for (name, selector) in namesAndSelectors {
+            addObserver(observer, selector: selector, name: name, object: object)
+        }
+    }
+    func removeObserver(_ observer: Any, names: [NSNotification.Name], object: Any? = nil) {
+        for name in names {
+            removeObserver(observer, name: name, object: object)
+        }
+    }
+}
+```
+
 Install
 -------
 
