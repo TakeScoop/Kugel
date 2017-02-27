@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "Kugel"
-  s.version      = "0.3.0"
+  s.version      = "0.3.1"
   s.summary      = "A glorious Swift wrapper around NSNotificationCenter"
 
   s.description  = <<-DESC
@@ -20,5 +20,8 @@ Pod::Spec.new do |s|
   s.osx.deployment_target = "10.9"
   s.ios.deployment_target = "8.0"
   s.tvos.deployment_target = "9.0"
+
+  # See https://github.com/TakeScoop/Kugel
+  s.deprecated = true
 
 end

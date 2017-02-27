@@ -8,10 +8,10 @@ Kugel
 
 A glorious Swift wrapper around [NSNotificationCenter](https://developer.apple.com/library/mac/documentation/Cocoa/Reference/Foundation/Classes/NSNotificationCenter_Class/).
 
-Important note
---------------
+⚠️ Deprecated ⚠️
+----------------
 
-**This library is not being maintained anymore.**
+**This library is deprecated and will not be maintained anymore.**
 
 With Swift 3, working with `NotificationCenter` is more concise so we recommend using `NotificationCenter.default` directly.
 
